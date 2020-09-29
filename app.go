@@ -10,9 +10,11 @@ import (
 )
 
 func search(w http.ResponseWriter, r *http.Request) {
+	Library := []string{"peNn", "Teller", "Boovs", "Furs", "fbDtr", "Nnpe"}
 	if r.Method == "GET" {
 		http.Error(w, "Method is supported.", http.StatusNotFound)
-
+		result := Anagramm(r.FormValue("word"), Library)
+		fmt.Println(result)
 		return
 	}
 }
@@ -27,16 +29,6 @@ func loader(w http.ResponseWriter, r *http.Request) {
 		fmt.Print(x)
 		return
 	}
-}
-
-func main() {
-	http.HandleFunc("/get", search)              // for search (GET) world in list
-	http.HandleFunc("/load", loader)             // for load (POST) world list
-	log.Fatal(http.ListenAndServe(":8080", nil)) // error log handler
-
-	x := "OOsvB"
-	Library := []string{"peNn", "Teller", "Boovs", "Furs", "fbDtr", "Nnpe"}
-	fmt.Println(Anagramm(x, Library))
 }
 
 // not used
@@ -61,4 +53,10 @@ func Anagramm(x string, Library []string) []string {
 		}
 	}
 	return Res
+}
+
+func main() {
+	http.HandleFunc("/get", search)              // for search (GET) world in list
+	http.HandleFunc("/load", loader)             // for load (POST) world list
+	log.Fatal(http.ListenAndServe(":8080", nil)) // error log handler
 }
