@@ -14,7 +14,8 @@ func search(w http.ResponseWriter, r *http.Request) {
 
 func loader(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		http.Error(w, "Method is not supported.", http.StatusNotFound)
+		log.Print(r.Form) // write in console any post data
+		http.Error(w, "Method POST is not supported.", http.StatusNotFound)
 		return
 	}
 }
